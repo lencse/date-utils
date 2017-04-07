@@ -2,6 +2,8 @@
 
 namespace Lencse\Date;
 
+use DateTime;
+
 class Time
 {
 
@@ -44,14 +46,39 @@ class Time
         return $this->min;
     }
 
-//    /**
-//     * The __toString method allows a class to decide how it will react when it is converted to a string.
-//     *
-//     * @return string
-//     * @link http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring
-//     */
-//    public function __toString()
-//    {
-//        return $this->asDateTime()->format('Hi');
-//    }
+    /**
+     * The __toString method allows a class to decide how it will react when it is converted to a string.
+     *
+     * @return string
+     * @link http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring
+     */
+    public function __toString()
+    {
+        return $this->getHourStr() . $this->getMinStr();
+    }
+
+    /**
+     * @return string
+     */
+    private function getHourStr()
+    {
+        return str_pad($this->hour, 2, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * @return string
+     */
+    private function getMinStr()
+    {
+        return str_pad($this->min, 2, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * @param Date $date
+     * @return DateTime
+     */
+    public function withDate(Date $date)
+    {
+        return $date->withTime($this);
+    }
 }

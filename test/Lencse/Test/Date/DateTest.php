@@ -3,9 +3,11 @@
 namespace Lencse\Test\Date;
 
 use Lencse\Date\Date;
+use Lencse\Date\Time;
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
+
     public function testDateCreation()
     {
         $date = new Date(2017, 3, 15);
@@ -45,7 +47,14 @@ class DateTest extends \PHPUnit_Framework_TestCase
     }
     public function testAsDateTime()
     {
-        $date = new Date(2017, 3, 18);
-        $this->assertEquals(\DateTime::createFromFormat('Y-m-d', '2017-03-18'), $date->asDateTime());
+        $date = new Date(2017, 3, 15);
+        $this->assertEquals(\DateTime::createFromFormat('Y-m-d', '2017-03-15'), $date->asDateTime());
+    }
+
+    public function testWithTime()
+    {
+        $date = new Date(2017, 3, 15);
+        $time = new Time(10, 5);
+        $this->assertEquals(\DateTime::createFromFormat('Y-m-d H:i:s', '2017-03-15 10:05:00'), $date->withTime($time));
     }
 }

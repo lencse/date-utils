@@ -2,8 +2,11 @@
 
 namespace Lencse\Date;
 
+use DateTime;
+
 class Date
 {
+
     /**
      * @var int
      */
@@ -57,7 +60,8 @@ class Date
     public function isWeekend()
     {
         $dayOfWeek = (int) $this->asDateTime()->format('N');
-        return $dayOfWeek == 6 || $dayOfWeek == 7;
+
+        return 6 == $dayOfWeek || 7 == $dayOfWeek;
     }
     /**
      * The __toString method allows a class to decide how it will react when it is converted to a string.
@@ -69,11 +73,21 @@ class Date
     {
         return $this->asDateTime()->format('Ymd');
     }
+
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function asDateTime()
     {
-        return \DateTime::createFromFormat('Y.n.j', implode('.', [$this->year, $this->month, $this->day]));
+        return DateTime::createFromFormat('Y.n.j', implode('.', [$this->year, $this->month, $this->day]));
+    }
+
+    /**
+     * @param Time $time
+     * @return DateTime
+     */
+    public function withTime(Time $time)
+    {
+        return DateTime::createFromFormat('YnjHi', $this . $time);
     }
 }

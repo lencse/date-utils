@@ -2,6 +2,8 @@
 
 namespace Lencse\Test\Date;
 
+use DateTime;
+use Lencse\Date\Date;
 use Lencse\Date\Time;
 
 class TimeTest extends \PHPUnit_Framework_Testcase
@@ -24,9 +26,16 @@ class TimeTest extends \PHPUnit_Framework_Testcase
         $this->fail('Exception should be thrown');
     }
 
-//    public function testToString()
-//    {
-//        $time = new Time(10, 6);
-//        $this->assertEquals('1006', (string) $time);
-//    }
+    public function testToString()
+    {
+        $time = new Time(10, 6);
+        $this->assertEquals('1006', (string) $time);
+    }
+
+    public function testWithTime()
+    {
+        $time = new Time(10, 5);
+        $date = new Date(2017, 3, 15);
+        $this->assertEquals(DateTime::createFromFormat('Y-m-d H:i:s', '2017-03-15 10:05:00'), $time->withDate($date));
+    }
 }
