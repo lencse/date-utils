@@ -16,6 +16,13 @@ class TimeTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals(6, $time->getMin());
     }
 
+    public function testFromString()
+    {
+        $time = Time::fromString('1006');
+        $this->assertEquals(10, $time->getHour());
+        $this->assertEquals(6, $time->getMin());
+    }
+
     public function testInvalid()
     {
         try {

@@ -29,10 +29,24 @@ class Date
         if (!checkdate($month, $day, $year)) {
             throw new \InvalidArgumentException(sprintf('Invalid date: %d.%d.%d.', $year, $month, $day));
         }
-        $this->year = $year;
-        $this->month = $month;
-        $this->day = $day;
+        $this->year = (int) $year;
+        $this->month = (int) $month;
+        $this->day = (int) $day;
     }
+
+    /**
+     * @param $str
+     * @return Date
+     */
+    public static function fromString($str)
+    {
+        $year = substr($str, 0, 4);
+        $month = substr($str, 4, 2);
+        $day = substr($str, 6, 2);
+
+        return new Date($year, $month, $day);
+    }
+
     /**
      * @return int
      */

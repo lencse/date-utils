@@ -26,8 +26,20 @@ class Time
         if (0 > $hour || 23 < $hour || 0 > $min || 59 < $min) {
             throw new \InvalidArgumentException(sprintf('Invalid time: %d:%d.', $hour, $min));
         }
-        $this->hour = $hour;
-        $this->min = $min;
+        $this->hour = (int) $hour;
+        $this->min = (int) $min;
+    }
+
+    /**
+     * @param $str
+     * @return Time
+     */
+    public static function fromString($str)
+    {
+        $hour = substr($str, 0, 2);
+        $min = substr($str, 2, 2);
+
+        return new Time($hour, $min);
     }
 
     /**
